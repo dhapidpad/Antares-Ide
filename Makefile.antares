@@ -1,0 +1,44 @@
+# Imported by Lapce's root Makefile with: -include Makefile.antares
+.PHONY: antares-push antares-watch antares-fmt antares-clippy antares-test antares-check antares-gate antares-gate-locked antares-workspace-check antares-workspace-test antares-scaffold antares-doctor
+
+antares-scaffold:
+	bash scripts/scaffold-check.sh
+
+antares-doctor:
+	bash scripts/antares-doctor.sh
+
+antares-fmt:
+	cargo fmt -p antares-agent -- --check
+
+# Bootstrap targets are intentionally unlocked once so the new member can update Cargo.lock.
+antares-clippy:
+	cargo clippy -p antares-agent --all-targets -- -D warnings
+
+antares-test:
+	cargo test -p antares-agent
+
+antares-check:
+	cargo check -p antares-agent
+
+antares-gate: antares-scaffold antares-fmt antares-clippy antares-test antares-check
+
+antares-gate-locked:
+	cargo metadata --locked --no-deps --format-version 1
+	cargo fmt -p antares-agent -- --check
+	cargo check -p antares-agent --locked
+	cargo test -p antares-agent --locked
+	cargo clippy -p antares-agent --all-targets --locked -- -D warnings
+
+antares-workspace-check:
+	cargo check --workspace
+
+antares-workspace-test:
+	cargo test --workspace
+
+# Push the current agy/* branch and watch GitHub Actions for the exact SHA.
+# Usage: make -f Makefile.antares antares-push MSG="feat(agent): add supervisor bridge"
+antares-push:
+	bash scripts/antares-push-and-watch.sh $(if $(MSG),--commit "$(MSG)",)
+
+antares-watch:
+	bash scripts/antares-push-and-watch.sh --watch-only
