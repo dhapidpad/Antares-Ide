@@ -3,20 +3,22 @@
 > This file is deliberately conservative. The presence of a design specification or scaffold is not proof that a feature works.
 
 ## Snapshot
-- Status: **IN PROGRESS (PHASE 2 COMPLETED / PHASE 3 ACTIVE)**
+- Status: **IN PROGRESS (PHASE 3 COMPLETED / PHASE 4 ACTIVE)**
 - Product: Antares IDE on Lapce foundation
 - Active roadmap: [`ROADMAP.md`](ROADMAP.md)
 - Product requirements: [`PRODUCT-SPEC.md`](PRODUCT-SPEC.md)
 - Design rules: [`DESIGN-SYSTEM.md`](DESIGN-SYSTEM.md)
-- Last status update: 2026-11-17 (Phase 2 Architecture & ADR Consolidation: Canonical 12-ADR architecture ledger approved in docs/adr/DECISIONS.md; Phase 1 data migration verified green in GitHub Actions)
+- Last status update: 2026-11-17 (Phase 3 Design Tokens, Themes & IconRegistry: Antares Aurora dark/light tokens, theme backward-compat aliases, safe svg fallback, and Semantic IconRegistry with SVG sanitizer verified in GitHub Actions runs 44090965408 & 44091118104)
 
 ## Evidence ledger
 | Area | Status | Evidence required |
 |---|---|---|
-| Build/toolchain | VERIFIED | Ubuntu 22.04 LTS, Rust 1.98.0, CI runs [44083923913](https://github.com/dhapidpad/Antares-Ide/actions/runs/44083923913) & [44084022073](https://github.com/dhapidpad/Antares-Ide/actions/runs/44084022073) |
-| Full workspace check | VERIFIED | `cargo check --workspace` clean in 3m27s (CI Run [44084022073](https://github.com/dhapidpad/Antares-Ide/actions/runs/44084022073)) |
-| Antares agent crate tests | VERIFIED | 61 unit/integration tests PASS (CI Run [44083923913](https://github.com/dhapidpad/Antares-Ide/actions/runs/44083923913)) |
-| Full workspace tests | VERIFIED | `cargo test --workspace` (93+ tests across `lapce-core`, `lapce-proxy`, `lapce-app`, `antares-agent`) PASS, 0 failed (CI Run [44084022073](https://github.com/dhapidpad/Antares-Ide/actions/runs/44084022073)) |
+| Build/toolchain | VERIFIED | Ubuntu 22.04/24.04, Rust 1.98.0, CI runs [44083923913](https://github.com/dhapidpad/Antares-Ide/actions/runs/44083923913) & [44091118104](https://github.com/dhapidpad/Antares-Ide/actions/runs/44091118104) |
+| Full workspace check | VERIFIED | `cargo check --workspace` clean (CI Run [44091118104](https://github.com/dhapidpad/Antares-Ide/actions/runs/44091118104)) |
+| Antares agent crate tests | VERIFIED | 61 unit/integration tests PASS (CI Run [44090965408](https://github.com/dhapidpad/Antares-Ide/actions/runs/44090965408) & [44091118104](https://github.com/dhapidpad/Antares-Ide/actions/runs/44091118104)) |
+| Full workspace tests | VERIFIED | `cargo test --workspace` (100+ tests across `lapce-core`, `lapce-proxy`, `lapce-app`, `antares-agent`) PASS, 0 failed (CI Run [44091118104](https://github.com/dhapidpad/Antares-Ide/actions/runs/44091118104)) |
+| Design tokens & themes | VERIFIED (PHASE 3) | Antares Aurora dark/light tokens, theme/icon aliases, safe svg fallback tested (CI Run [44091118104](https://github.com/dhapidpad/Antares-Ide/actions/runs/44091118104)) |
+| Semantic IconRegistry | VERIFIED (PHASE 3) | Namespaces, semantic icons, default fallbacks, custom override & SVG sanitizer tested (CI Run [44091118104](https://github.com/dhapidpad/Antares-Ide/actions/runs/44091118104)) |
 | Antares agent runtime | NOT VERIFIED | process lifecycle + ACP E2E test with real Octomind binary |
 | Agent UI | NOT VERIFIED | desktop smoke test + real event wiring (Floem effect handling) |
 | Multi-agent workflows | NOT VERIFIED | parallel/sequence/recovery tests |
