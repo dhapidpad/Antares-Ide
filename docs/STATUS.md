@@ -3,20 +3,22 @@
 > This file is deliberately conservative. The presence of a design specification or scaffold is not proof that a feature works.
 
 ## Snapshot
-- Status: **AUDIT REQUIRED / NOT VERIFIED**
+- Status: **IN PROGRESS (PHASE 0 BASELINE AUDIT)**
 - Product: Antares IDE on Lapce foundation
 - Active roadmap: [`ROADMAP.md`](ROADMAP.md)
 - Product requirements: [`PRODUCT-SPEC.md`](PRODUCT-SPEC.md)
 - Design rules: [`DESIGN-SYSTEM.md`](DESIGN-SYSTEM.md)
-- Last status update: 2026-11-17 (repository reorganization only; no runtime feature verification performed)
+- Last status update: 2026-11-17 (Phase 0 Baseline: full workspace compilation `cargo check --workspace` and 61 agent crate tests verified green in GitHub Actions)
 
 ## Evidence ledger
 | Area | Status | Evidence required |
 |---|---|---|
-| Build/toolchain | NOT VERIFIED | exact toolchain + command logs |
-| Full workspace tests | NOT VERIFIED | `cargo test --workspace` result |
-| Antares agent runtime | NOT VERIFIED | process lifecycle + ACP E2E test |
-| Agent UI | NOT VERIFIED | desktop smoke test + real event wiring |
+| Build/toolchain | VERIFIED | Ubuntu 22.04 LTS, Rust 1.98.0, CI runs [44080240671](https://github.com/dhapidpad/Antares-Ide/actions/runs/44080240671) & [44080379640](https://github.com/dhapidpad/Antares-Ide/actions/runs/44080379640) |
+| Full workspace check | VERIFIED | `cargo check --workspace` clean in 3m27s (CI Run [44080379640](https://github.com/dhapidpad/Antares-Ide/actions/runs/44080379640)) |
+| Antares agent crate tests | VERIFIED | 61 unit/integration tests PASS (CI Run [44080240671](https://github.com/dhapidpad/Antares-Ide/actions/runs/44080240671)) |
+| Full workspace tests | NOT RUN | `cargo test --workspace` result |
+| Antares agent runtime | NOT VERIFIED | process lifecycle + ACP E2E test with real Octomind binary |
+| Agent UI | NOT VERIFIED | desktop smoke test + real event wiring (Floem effect handling) |
 | Multi-agent workflows | NOT VERIFIED | parallel/sequence/recovery tests |
 | Generic MCP client | NOT VERIFIED | protocol contract tests |
 | Plugin/skill manager | NOT VERIFIED | install/trust/rollback tests |
