@@ -4,6 +4,7 @@ use std::{rc::Rc, sync::Arc};
 
 use antares_agent::{ChatRole, PanelLifecycle, ToolStatus};
 use floem::{
+    reactive::{SignalGet, SignalUpdate, SignalWith},
     views::{
         container, dyn_stack, empty, h_stack, label, scroll, stack, text,
         Decorators,
@@ -47,7 +48,7 @@ pub fn antares_panel(
                     });
                     let is_streaming = state.with(|s| s.is_streaming());
                     let color = if is_err {
-                        config.get().color(LapceColor::PROBLEM)
+                        config.get().color(LapceColor::LAPCE_ERROR)
                     } else if is_streaming {
                         config.get().color(LapceColor::EDITOR_LINK)
                     } else {
@@ -309,7 +310,7 @@ pub fn antares_panel(
     .style(move |s| {
         s.width_full()
             .padding(8.0)
-            .gap(6.0, 0.0)
+            .gap(6.0)
             .items_center()
             .background(config.get().color(LapceColor::EDITOR_BACKGROUND))
             .border_top(1.0)
