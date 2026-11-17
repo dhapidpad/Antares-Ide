@@ -1045,13 +1045,13 @@ mod tests {
     #[test]
     fn test_antares_default_themes_and_icons() {
         assert_eq!(
-            DEFAULT_DARK_THEME_COLOR_CONFIG.name.as_deref(),
-            Some("Antares Dark"),
+            DEFAULT_DARK_THEME_COLOR_CONFIG.name.as_str(),
+            "Antares Dark",
             "Default dark theme name should be Antares Dark"
         );
         assert_eq!(
-            DEFAULT_ICON_THEME_ICON_CONFIG.name.as_deref(),
-            Some("Antares Codicons"),
+            DEFAULT_ICON_THEME_ICON_CONFIG.name.as_str(),
+            "Antares Codicons",
             "Default icon theme name should be Antares Codicons"
         );
         assert!(
