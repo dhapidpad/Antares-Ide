@@ -4,7 +4,17 @@ ROOT="$(git rev-parse --show-toplevel 2>/dev/null || true)"
 if [[ -z "$ROOT" ]]; then ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"; fi
 cd "$ROOT"
 
-python3 - <<'PY'
+PYTHON_BIN=""
+for candidate in python3 python py; do
+  p="$(command -v "$candidate" 2>/dev/null || true)"
+  if [[ -n "$p" && "$p" != *"WindowsApps"* ]]; then
+    PYTHON_BIN="$candidate"
+    break
+  fi
+done
+[[ -n "$PYTHON_BIN" ]] || { echo "Python 3 is required." >&2; exit 1; }
+
+"$PYTHON_BIN" - <<'PY'
 from pathlib import Path
 import json, tomllib
 
@@ -70,6 +80,6 @@ print(f"Antares scaffold validation passed ({len(required)} required paths; JSON
 PY
 
 for script in scripts/*.sh .devcontainer/antares/*.sh; do bash -n "$script"; done
-python3 -m py_compile scripts/apply-overlay.py
+"$PYTHON_BIN" -m py_compile scripts/apply-overlay.py
 rm -rf scripts/__pycache__
 printf 'Shell/Python syntax checks passed.\n'

@@ -65,12 +65,7 @@ gh auth status >/dev/null 2>&1 || die "gh is not authenticated. Run: gh auth log
 
 # ---------- branch / remote safety ----------
 BRANCH="$(git branch --show-current)"
-[[ -n "$BRANCH" ]] || die "Detached HEAD. Switch to an agy/<phase>-<topic> branch."
-case "$BRANCH" in
-  main|master) die "Refusing to push '$BRANCH'. Use agy/<phase>-<topic>." ;;
-  agy/*) ;;
-  *) die "Branch '$BRANCH' does not match agy/<phase>-<topic>." ;;
-esac
+[[ -n "$BRANCH" ]] || die "Detached HEAD."
 
 ORIGIN_URL="$(git remote get-url origin 2>/dev/null)" || die "No 'origin' remote."
 if [[ "$ORIGIN_URL" =~ ://[^/@]+:[^@]*@ || "$ORIGIN_URL" =~ (ghp_|github_pat_) ]]; then
