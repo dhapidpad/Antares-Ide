@@ -4,7 +4,7 @@ use std::{rc::Rc, sync::Arc};
 
 use antares_agent::{ChatRole, PanelLifecycle, ToolStatus};
 use floem::{
-    reactive::{SignalGet, SignalUpdate, SignalWith},
+    reactive::{SignalGet, SignalWith},
     views::{
         container, dyn_stack, empty, h_stack, label, scroll, stack, text,
         Decorators,
@@ -229,7 +229,7 @@ pub fn antares_panel(
             })
         })
         .style(move |s| {
-            s.color(config.get().color(LapceColor::PROBLEM))
+            s.color(config.get().color(LapceColor::LAPCE_ERROR))
                 .font_size(12.0)
         }),
     )
