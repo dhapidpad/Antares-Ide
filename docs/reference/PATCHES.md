@@ -19,3 +19,5 @@ The Antares IDE integration keeps modifications to upstream Lapce files isolated
 | `lapce-app/src/command.rs` | Update ShowAbout command description | Display "About Antares IDE" in command palette | Update strum message | Applied |
 | `lapce-app/src/about.rs` | Update About popup branding and GitHub link | Point to Antares repo and show Antares IDE title | Update label and const GITHUB | Applied |
 | `extra/linux/dev.lapce.lapce.desktop` | Update desktop metadata name to Antares IDE | Linux desktop integration branding | Update Name and GenericName | Applied |
+| `lapce-core/build.rs` | Update `NAME` constant from `Lapce-{branch}` to `Antares-{branch}` | Product identity and directory isolation for Antares IDE | Update format string in meta generator | Applied |
+| `lapce-core/src/directory.rs` | Update project dirs to Antares with legacy Lapce migration | Automatic non-destructive migration from Lapce config/data | Add `migrate_directory_content` and fallback check | Applied |
