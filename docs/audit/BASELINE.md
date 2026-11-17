@@ -14,9 +14,9 @@
 | Check (agent) | `cargo check -p antares-agent` | PASS | CI Run [44080240671](https://github.com/dhapidpad/Antares-Ide/actions/runs/44080240671) |
 | Tests (agent) | `cargo test -p antares-agent` (61 tests) | PASS | CI Run [44080240671](https://github.com/dhapidpad/Antares-Ide/actions/runs/44080240671) |
 | Clippy (agent) | `cargo clippy -p antares-agent --all-targets -- -D warnings` | PASS | CI Run [44080240671](https://github.com/dhapidpad/Antares-Ide/actions/runs/44080240671) |
-| Check (workspace) | `cargo check --workspace` | PASS (3m27s) | CI Run [44080379640](https://github.com/dhapidpad/Antares-Ide/actions/runs/44080379640) |
-| Metadata | `cargo metadata --format-version 1 --no-deps` | NOT RUN | — |
-| Tests (workspace) | `cargo test --workspace` | NOT RUN | Requires headless display / runner test matrix |
+| Commit SHA | `5790bad49510a5aa6795234c0383c45ac7521bf0` |
+| Check (workspace) | `cargo check --workspace` | PASS (3m27s) | CI Run [44082026237](https://github.com/dhapidpad/Antares-Ide/actions/runs/44082026237) |
+| Tests (workspace) | `cargo test --workspace` | PASS (90+ tests, 0 failed, 1m47s) | CI Run [44082026237](https://github.com/dhapidpad/Antares-Ide/actions/runs/44082026237) |
 | Clippy (workspace) | `cargo clippy --workspace --all-targets -- -D warnings` | NOT RUN | — |
 | Dependencies | `cargo tree -d` | NOT RUN | — |
 

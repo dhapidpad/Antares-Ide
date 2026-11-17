@@ -8,15 +8,15 @@
 - Active roadmap: [`ROADMAP.md`](ROADMAP.md)
 - Product requirements: [`PRODUCT-SPEC.md`](PRODUCT-SPEC.md)
 - Design rules: [`DESIGN-SYSTEM.md`](DESIGN-SYSTEM.md)
-- Last status update: 2026-11-17 (Phase 0 Baseline: full workspace compilation `cargo check --workspace` and 61 agent crate tests verified green in GitHub Actions)
+- Last status update: 2026-11-17 (Phase 0 Baseline: full workspace compilation and full workspace test suite `cargo test --workspace` verified 100% green in GitHub Actions)
 
 ## Evidence ledger
 | Area | Status | Evidence required |
 |---|---|---|
-| Build/toolchain | VERIFIED | Ubuntu 22.04 LTS, Rust 1.98.0, CI runs [44080240671](https://github.com/dhapidpad/Antares-Ide/actions/runs/44080240671) & [44080379640](https://github.com/dhapidpad/Antares-Ide/actions/runs/44080379640) |
-| Full workspace check | VERIFIED | `cargo check --workspace` clean in 3m27s (CI Run [44080379640](https://github.com/dhapidpad/Antares-Ide/actions/runs/44080379640)) |
-| Antares agent crate tests | VERIFIED | 61 unit/integration tests PASS (CI Run [44080240671](https://github.com/dhapidpad/Antares-Ide/actions/runs/44080240671)) |
-| Full workspace tests | NOT RUN | `cargo test --workspace` result |
+| Build/toolchain | VERIFIED | Ubuntu 22.04 LTS, Rust 1.98.0, CI runs [44081883831](https://github.com/dhapidpad/Antares-Ide/actions/runs/44081883831) & [44082026237](https://github.com/dhapidpad/Antares-Ide/actions/runs/44082026237) |
+| Full workspace check | VERIFIED | `cargo check --workspace` clean in 3m27s (CI Run [44082026237](https://github.com/dhapidpad/Antares-Ide/actions/runs/44082026237)) |
+| Antares agent crate tests | VERIFIED | 61 unit/integration tests PASS (CI Run [44081883831](https://github.com/dhapidpad/Antares-Ide/actions/runs/44081883831)) |
+| Full workspace tests | VERIFIED | `cargo test --workspace` (90+ tests across `lapce-core`, `lapce-proxy`, `lapce-app`, `antares-agent`) PASS, 0 failed (CI Run [44082026237](https://github.com/dhapidpad/Antares-Ide/actions/runs/44082026237)) |
 | Antares agent runtime | NOT VERIFIED | process lifecycle + ACP E2E test with real Octomind binary |
 | Agent UI | NOT VERIFIED | desktop smoke test + real event wiring (Floem effect handling) |
 | Multi-agent workflows | NOT VERIFIED | parallel/sequence/recovery tests |
