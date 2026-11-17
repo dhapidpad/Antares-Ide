@@ -22,8 +22,8 @@ jobs:
     name: Scaffold + Antares crate
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: dtolnay/rust-toolchain@1.98.0
+      - uses: actions/checkout@v7
+      - uses: dtolnay/rust-toolchain@1.120.0
         with:
           components: rustfmt, clippy
       - uses: Swatinem/rust-cache@v2
@@ -46,8 +46,8 @@ jobs:
     if: github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: dtolnay/rust-toolchain@1.98.0
+      - uses: actions/checkout@v7
+      - uses: dtolnay/rust-toolchain@1.120.0
       - uses: Swatinem/rust-cache@v2
       - name: Install Lapce Linux build dependencies
         run: |

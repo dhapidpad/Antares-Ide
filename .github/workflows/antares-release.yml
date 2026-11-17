@@ -22,8 +22,8 @@ jobs:
             artifact: macos
     runs-on: ${{ matrix.os }}
     steps:
-      - uses: actions/checkout@v4
-      - uses: dtolnay/rust-toolchain@1.98.0
+      - uses: actions/checkout@v7
+      - uses: dtolnay/rust-toolchain@1.120.0
       - uses: Swatinem/rust-cache@v2
       - name: Install Linux dependencies
         if: runner.os == 'Linux'
@@ -44,7 +44,7 @@ jobs:
           done
           test -n "$(find dist -maxdepth 1 -type f -print -quit)"
           printf '%s\n' "Antares IDE based on Lapce; see LICENSE and THIRD_PARTY_LICENSES.md." > dist/BUILD-INFO.txt
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         with:
           name: antares-${{ matrix.artifact }}
           path: dist/*
