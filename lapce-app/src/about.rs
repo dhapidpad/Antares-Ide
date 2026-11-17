@@ -25,8 +25,11 @@ const APP_TAGLINE: &str = "Octomind × Lapce — a fast, native code editor";
 struct AboutUri;
 
 impl AboutUri {
-    const GITHUB: &'static str = "https://github.com/dhapidpad/AntaresIDE";
+    const GITHUB: &'static str = "https://github.com/dhapidpad/Antares-Ide";
     const DISCORD: &'static str = "https://discord.gg/n8tGJ6Rn6D";
+    const LAPCE: &'static str = "https://lapce.dev";
+    const MATRIX: &'static str = "https://matrix.to/#/#lapce-space:matrix.org";
+    const CODICONS: &'static str = "https://github.com/microsoft/vscode-codicons";
 }
 
 #[derive(Clone, Debug)]

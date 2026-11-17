@@ -1,6 +1,6 @@
 //! Native Floem view implementation for the Antares AI agent panel.
 
-use std::{rc::Rc, sync::Arc};
+use std::rc::Rc;
 
 use antares_agent::{ChatRole, PanelLifecycle, ToolStatus};
 use floem::{
@@ -9,12 +9,12 @@ use floem::{
         container, dyn_stack, empty, h_stack, label, scroll, stack, text,
         Decorators,
     },
-    IntoView, View,
+    View,
 };
 
 use crate::{
     app::clickable_icon,
-    config::{color::LapceColor, icon::LapceIcons, LapceConfig},
+    config::{color::LapceColor, icon::LapceIcons},
     panel::position::PanelPosition,
     window_tab::WindowTabData,
 };
