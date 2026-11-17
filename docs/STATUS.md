@@ -8,15 +8,15 @@
 - Active roadmap: [`ROADMAP.md`](ROADMAP.md)
 - Product requirements: [`PRODUCT-SPEC.md`](PRODUCT-SPEC.md)
 - Design rules: [`DESIGN-SYSTEM.md`](DESIGN-SYSTEM.md)
-- Last status update: 2026-11-17 (Phase 0 Baseline: full workspace compilation and full workspace test suite `cargo test --workspace` verified 100% green in GitHub Actions)
+- Last status update: 2026-11-17 (Phase 1 Brand identity & migration: NAME = Antares-{branch}, project dirs dev/antares/NAME, non-destructive legacy Lapce migration and unit tests verified green in GitHub Actions)
 
 ## Evidence ledger
 | Area | Status | Evidence required |
 |---|---|---|
-| Build/toolchain | VERIFIED | Ubuntu 22.04 LTS, Rust 1.98.0, CI runs [44081883831](https://github.com/dhapidpad/Antares-Ide/actions/runs/44081883831) & [44082026237](https://github.com/dhapidpad/Antares-Ide/actions/runs/44082026237) |
-| Full workspace check | VERIFIED | `cargo check --workspace` clean in 3m27s (CI Run [44082026237](https://github.com/dhapidpad/Antares-Ide/actions/runs/44082026237)) |
-| Antares agent crate tests | VERIFIED | 61 unit/integration tests PASS (CI Run [44081883831](https://github.com/dhapidpad/Antares-Ide/actions/runs/44081883831)) |
-| Full workspace tests | VERIFIED | `cargo test --workspace` (90+ tests across `lapce-core`, `lapce-proxy`, `lapce-app`, `antares-agent`) PASS, 0 failed (CI Run [44082026237](https://github.com/dhapidpad/Antares-Ide/actions/runs/44082026237)) |
+| Build/toolchain | VERIFIED | Ubuntu 22.04 LTS, Rust 1.98.0, CI runs [44083923913](https://github.com/dhapidpad/Antares-Ide/actions/runs/44083923913) & [44084022073](https://github.com/dhapidpad/Antares-Ide/actions/runs/44084022073) |
+| Full workspace check | VERIFIED | `cargo check --workspace` clean in 3m27s (CI Run [44084022073](https://github.com/dhapidpad/Antares-Ide/actions/runs/44084022073)) |
+| Antares agent crate tests | VERIFIED | 61 unit/integration tests PASS (CI Run [44083923913](https://github.com/dhapidpad/Antares-Ide/actions/runs/44083923913)) |
+| Full workspace tests | VERIFIED | `cargo test --workspace` (93+ tests across `lapce-core`, `lapce-proxy`, `lapce-app`, `antares-agent`) PASS, 0 failed (CI Run [44084022073](https://github.com/dhapidpad/Antares-Ide/actions/runs/44084022073)) |
 | Antares agent runtime | NOT VERIFIED | process lifecycle + ACP E2E test with real Octomind binary |
 | Agent UI | NOT VERIFIED | desktop smoke test + real event wiring (Floem effect handling) |
 | Multi-agent workflows | NOT VERIFIED | parallel/sequence/recovery tests |
@@ -25,7 +25,7 @@
 | Local API | NOT VERIFIED | auth/scope/loopback tests |
 | Git UX | NOT VERIFIED | clone/push/credential tests |
 | Discord RPC | NOT VERIFIED | opt-in/privacy/failure tests |
-| Rebrand migration | NOT VERIFIED | upgrade/rollback OS matrix |
+| Rebrand migration | VERIFIED (PHASE 1) | Data directory migration + non-destructive legacy import tested (CI Run [44084022073](https://github.com/dhapidpad/Antares-Ide/actions/runs/44084022073)) |
 | Dead-code cleanup | NOT VERIFIED | reviewed inventory + before/after metrics |
 
 ## Rules for status updates
