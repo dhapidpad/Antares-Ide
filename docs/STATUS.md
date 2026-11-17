@@ -3,12 +3,12 @@
 > This file is deliberately conservative. The presence of a design specification or scaffold is not proof that a feature works.
 
 ## Snapshot
-- Status: **IN PROGRESS (PHASE 0 BASELINE AUDIT)**
+- Status: **IN PROGRESS (PHASE 2 COMPLETED / PHASE 3 ACTIVE)**
 - Product: Antares IDE on Lapce foundation
 - Active roadmap: [`ROADMAP.md`](ROADMAP.md)
 - Product requirements: [`PRODUCT-SPEC.md`](PRODUCT-SPEC.md)
 - Design rules: [`DESIGN-SYSTEM.md`](DESIGN-SYSTEM.md)
-- Last status update: 2026-11-17 (Phase 1 Brand identity & migration: NAME = Antares-{branch}, project dirs dev/antares/NAME, non-destructive legacy Lapce migration and unit tests verified green in GitHub Actions)
+- Last status update: 2026-11-17 (Phase 2 Architecture & ADR Consolidation: Canonical 12-ADR architecture ledger approved in docs/adr/DECISIONS.md; Phase 1 data migration verified green in GitHub Actions)
 
 ## Evidence ledger
 | Area | Status | Evidence required |
