@@ -58,3 +58,5 @@ jobs:
             libwayland-dev libx11-xcb-dev libxcb-shape0-dev libxcb-xfixes0-dev xorg-dev
       - name: Check full workspace
         run: cargo check --workspace
+      - name: Test full workspace
+        run: cargo test --workspace
