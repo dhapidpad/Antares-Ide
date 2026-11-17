@@ -36,7 +36,7 @@ impl PanelKind {
             PanelKind::DocumentSymbol => LapceIcons::DOCUMENT_SYMBOL,
             PanelKind::References => LapceIcons::REFERENCES,
             PanelKind::Implementation => LapceIcons::IMPLEMENTATION,
-            PanelKind::Antares => LapceIcons::LIGHTBULB,
+            PanelKind::Antares => LapceIcons::ANTARES_AGENT,
         }
     }
 

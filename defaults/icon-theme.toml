@@ -1,7 +1,7 @@
 #:schema ../extra/schemas/icon-theme.json
 
 [icon-theme]
-name = "Lapce Codicons"
+name = "Antares Codicons"
 
 [icon-theme.ui]
 "logo" = "lapce_logo.svg"
@@ -37,6 +37,17 @@ name = "Lapce Codicons"
 "breadcrumb_separator" = "chevron-right.svg"
 "symbol_color" = "symbol-color.svg"
 "type_hierarchy" = "type-hierarchy.svg"
+
+"antares.agent" = "lightbulb.svg"
+"antares.mcp" = "extensions.svg"
+"nav.agents" = "lightbulb.svg"
+"nav.mcp" = "extensions.svg"
+"agent.planner" = "lightbulb.svg"
+"agent.coder" = "file-code.svg"
+"agent.reviewer" = "search.svg"
+"agent.tester" = "debug-start.svg"
+"status.success" = "circle-filled.svg"
+"status.info" = "info.svg"
 
 "window.close" = "chrome-close.svg"
 "window.restore" = "chrome-restore.svg"

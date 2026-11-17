@@ -22,7 +22,7 @@ use self::{
     color_theme::{ColorThemeConfig, ThemeColor, ThemeColorPreference},
     core::CoreConfig,
     editor::{EditorConfig, SCALE_OR_SIZE_LIMIT, WrapStyle},
-    icon::LapceIcons,
+    icon::{IconNamespace, IconRegistry, LapceIcons, SemanticIcon},
     icon_theme::IconThemeConfig,
     svg::SvgStore,
     terminal::TerminalConfig,
@@ -261,21 +261,35 @@ impl LapceConfig {
     fn resolve_theme(&mut self, workspace: &LapceWorkspace) {
         let default_lapce_config = DEFAULT_LAPCE_CONFIG.clone();
 
+        let theme_key = match self.core.color_theme.to_lowercase().as_str() {
+            "lapce dark" => "antares dark".to_string(),
+            "lapce light" => "antares light".to_string(),
+            other => other.to_string(),
+        };
+
         let color_theme_config = self
             .available_color_themes
-            .get(&self.core.color_theme.to_lowercase())
+            .get(&theme_key)
+            .or_else(|| self.available_color_themes.get(&self.core.color_theme.to_lowercase()))
             .map(|(_, config)| config)
             .unwrap_or(&DEFAULT_DARK_THEME_CONFIG);
 
+        let icon_key = match self.core.icon_theme.to_lowercase().as_str() {
+            "lapce codicons" => "antares codicons".to_string(),
+            other => other.to_string(),
+        };
+
         let icon_theme_config = self
             .available_icon_themes
-            .get(&self.core.icon_theme.to_lowercase())
+            .get(&icon_key)
+            .or_else(|| self.available_icon_themes.get(&self.core.icon_theme.to_lowercase()))
             .map(|(_, config, _)| config)
             .unwrap_or(&DEFAULT_ICON_THEME_CONFIG);
 
         let icon_theme_path = self
             .available_icon_themes
-            .get(&self.core.icon_theme.to_lowercase())
+            .get(&icon_key)
+            .or_else(|| self.available_icon_themes.get(&self.core.icon_theme.to_lowercase()))
             .map(|(_, _, path)| path);
 
         if let Ok(new) = Self::merge_config(
@@ -601,7 +615,12 @@ impl LapceConfig {
         });
 
         svg.unwrap_or_else(|| {
-            let name = DEFAULT_ICON_THEME_ICON_CONFIG.ui.get(icon).unwrap();
+            let name = DEFAULT_ICON_THEME_ICON_CONFIG
+                .ui
+                .get(icon)
+                .map(|s| s.as_str())
+                .or_else(|| IconRegistry::default_glyph_for_key(icon))
+                .unwrap_or("file.svg");
             self.svg_store.write().get_default_svg(name)
         })
     }
@@ -1016,5 +1035,35 @@ impl LapceConfig {
         std::fs::write(path, main_table.to_string().as_bytes()).ok()?;
 
         Some(())
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_antares_default_themes_and_icons() {
+        assert_eq!(
+            DEFAULT_DARK_THEME_COLOR_CONFIG.name.as_deref(),
+            Some("Antares Dark"),
+            "Default dark theme name should be Antares Dark"
+        );
+        assert_eq!(
+            DEFAULT_ICON_THEME_ICON_CONFIG.name.as_deref(),
+            Some("Antares Codicons"),
+            "Default icon theme name should be Antares Codicons"
+        );
+        assert!(
+            DEFAULT_ICON_THEME_ICON_CONFIG.ui.contains_key("antares.agent"),
+            "Default icon theme must contain antares.agent icon"
+        );
+    }
+
+    #[test]
+    fn test_ui_svg_safe_fallback_no_panic() {
+        let config = LapceConfig::default_lapce_config();
+        let svg = config.ui_svg("nonexistent.random.icon.key");
+        assert!(!svg.is_empty(), "Fallback SVG must not be empty");
     }
 }

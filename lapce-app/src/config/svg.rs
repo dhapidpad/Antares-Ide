@@ -46,7 +46,8 @@ impl SvgStore {
             } else {
                 CODICONS_ICONS_DIR
                     .get_file(name)
-                    .unwrap_or_else(|| panic!("Failed to unwrap {name}"))
+                    .or_else(|| CODICONS_ICONS_DIR.get_file("file.svg"))
+                    .expect("file.svg fallback must exist in codicons")
             };
             let content = file.contents_utf8().unwrap();
             self.svgs.insert(name.to_string(), content.to_string());

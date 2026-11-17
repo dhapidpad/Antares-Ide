@@ -21,3 +21,12 @@ The Antares IDE integration keeps modifications to upstream Lapce files isolated
 | `extra/linux/dev.lapce.lapce.desktop` | Update desktop metadata name to Antares IDE | Linux desktop integration branding | Update Name and GenericName | Applied |
 | `lapce-core/build.rs` | Update `NAME` constant from `Lapce-{branch}` to `Antares-{branch}` | Product identity and directory isolation for Antares IDE | Update format string in meta generator | Applied |
 | `lapce-core/src/directory.rs` | Update project dirs to Antares with legacy Lapce migration | Automatic non-destructive migration from Lapce config/data | Add `migrate_directory_content` and fallback check | Applied |
+| `defaults/dark-theme.toml` | Update theme name to "Antares Dark" & add Antares Aurora tokens | Antares Aurora dark design tokens per DESIGN-SYSTEM §3 | Update name and semantic base/ui color keys | Applied |
+| `defaults/light-theme.toml` | Update theme name to "Antares Light" & add Antares Aurora tokens | Antares Aurora light design tokens per DESIGN-SYSTEM §3 | Update name and semantic base/ui color keys | Applied |
+| `defaults/icon-theme.toml` | Update theme name to "Antares Codicons" & add agent/mcp icons | Antares Codicon icon pack with agent/mcp semantics | Update name and add semantic UI keys | Applied |
+| `defaults/settings.toml` | Set default color-theme & icon-theme to Antares | Default out-of-the-box experience for Antares IDE | Update default theme setting strings | Applied |
+| `lapce-app/src/config.rs` | Theme/icon alias mapping with safe `ui_svg` fallback | Backward compatibility for legacy Lapce configs & zero-panic SVG | Map legacy names to Antares in resolve_theme | Applied |
+| `lapce-app/src/config/core.rs` | Update theme & icon config field descriptions | Product identity in settings documentation | Update field_names desc attributes | Applied |
+| `lapce-app/src/config/icon.rs` | Add `IconNamespace`, `SemanticIcon`, `IconRegistry` | Unified semantic icon system & SVG sanitizer per ADR-009 | Add enums, registry struct, and unit tests | Applied |
+| `lapce-app/src/config/svg.rs` | Safe fallback to `file.svg` on missing glyphs | Prevent runtime panics if glyph not found in codicons | Add `or_else` fallback to CODICONS_ICONS_DIR | Applied |
+| `lapce-app/src/panel/kind.rs` | Use `LapceIcons::ANTARES_AGENT` for `PanelKind::Antares` | Semantic icon key for Antares Agent panel | Update icon mapping in `PanelKind::svg_name` | Applied |
