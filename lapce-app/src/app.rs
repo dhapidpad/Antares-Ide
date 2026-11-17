@@ -206,7 +206,7 @@ impl AppData {
     fn default_window_config(&self) -> WindowConfig {
         WindowConfig::default()
             .apply_default_theme(false)
-            .title("Lapce")
+            .title("Antares IDE")
     }
 
     pub fn new_window(&self, folder: Option<PathBuf>) {

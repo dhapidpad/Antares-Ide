@@ -121,6 +121,28 @@ mode = "i"
 key = "Ctrl+`"
 command = "toggle_terminal_focus"
 
+# --------------------------------- Workbench Panels & Layout ------------------------
+
+[[keymaps]]
+key = "Ctrl+b"
+command = "toggle_panel_left_visual"
+
+[[keymaps]]
+key = "Ctrl+j"
+command = "toggle_panel_bottom_visual"
+
+[[keymaps]]
+key = "Ctrl+Alt+b"
+command = "toggle_panel_right_visual"
+
+[[keymaps]]
+key = "Ctrl+Alt+a"
+command = "toggle_antares_agent_visual"
+
+[[keymaps]]
+key = "Ctrl+Shift+a"
+command = "toggle_antares_agent_focus"
+
 # ------------------------------------ File Explorer ---------------------------------
 
 [[keymaps]]

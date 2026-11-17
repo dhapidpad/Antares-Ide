@@ -1304,6 +1304,9 @@ impl WindowTabData {
             ToggleSearchFocus => {
                 self.toggle_panel_focus(PanelKind::Search);
             }
+            ToggleAntaresAgentFocus => {
+                self.toggle_panel_focus(PanelKind::Antares);
+            }
             ToggleTerminalVisual => {
                 self.toggle_panel_visual(PanelKind::Terminal);
             }
@@ -1324,6 +1327,37 @@ impl WindowTabData {
             }
             ToggleSearchVisual => {
                 self.toggle_panel_visual(PanelKind::Search);
+            }
+            ToggleAntaresAgentVisual => {
+                self.toggle_panel_visual(PanelKind::Antares);
+            }
+            ApplyLayoutCoding => {
+                self.panel.apply_layout_preset(crate::panel::layout_preset::LayoutPreset::Coding);
+                self.common.focus.set(Focus::Workbench);
+            }
+            ApplyLayoutAgentic => {
+                self.panel.apply_layout_preset(crate::panel::layout_preset::LayoutPreset::Agentic);
+                self.common.focus.set(Focus::Panel(PanelKind::Antares));
+            }
+            ApplyLayoutReview => {
+                self.panel.apply_layout_preset(crate::panel::layout_preset::LayoutPreset::Review);
+                self.common.focus.set(Focus::Panel(PanelKind::SourceControl));
+            }
+            ApplyLayoutDebug => {
+                self.panel.apply_layout_preset(crate::panel::layout_preset::LayoutPreset::Debug);
+                self.common.focus.set(Focus::Panel(PanelKind::Debug));
+            }
+            ApplyLayoutMinimal => {
+                self.panel.apply_layout_preset(crate::panel::layout_preset::LayoutPreset::Minimal);
+                self.common.focus.set(Focus::Workbench);
+            }
+            ApplyLayoutPresentation => {
+                self.panel.apply_layout_preset(crate::panel::layout_preset::LayoutPreset::Presentation);
+                self.common.focus.set(Focus::Workbench);
+            }
+            ResetUiLayout => {
+                self.panel.reset_ui_layout();
+                self.common.focus.set(Focus::Workbench);
             }
             FocusEditor => {
                 self.common.focus.set(Focus::Workbench);

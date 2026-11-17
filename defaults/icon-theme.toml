@@ -104,6 +104,8 @@ name = "Antares Codicons"
 
 "layout.panel.on" = "layout-panel.svg"
 "layout.panel.off" = "layout-panel-off.svg"
+"layout" = "layout.svg"
+"nav.layout" = "layout.svg"
 
 "search.icon" = "search.svg"
 "search.clear" = "close.svg"

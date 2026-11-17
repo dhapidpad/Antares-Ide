@@ -10,6 +10,7 @@ use serde::{Deserialize, Serialize};
 
 use super::{
     kind::PanelKind,
+    layout_preset::{LayoutPreset, reset_ui_layout_state},
     position::{PanelContainerPosition, PanelPosition},
     style::PanelStyle,
 };
@@ -73,6 +74,19 @@ pub struct PanelSize {
     pub bottom_split: f64,
     pub right: f64,
     pub right_split: f64,
+}
+
+impl Default for PanelSize {
+    fn default() -> Self {
+        Self {
+            left: 280.0,
+            left_split: 0.5,
+            bottom: 240.0,
+            bottom_split: 0.5,
+            right: 340.0,
+            right_split: 0.5,
+        }
+    }
 }
 
 #[derive(Clone, Serialize, Deserialize)]
@@ -153,14 +167,7 @@ impl PanelData {
             },
         );
         let styles = cx.create_rw_signal(styles);
-        let size = cx.create_rw_signal(PanelSize {
-            left: 250.0,
-            left_split: 0.5,
-            bottom: 300.0,
-            bottom_split: 0.5,
-            right: 250.0,
-            right_split: 0.5,
-        });
+        let size = cx.create_rw_signal(PanelSize::default());
         let sections = cx.create_rw_signal(
             sections
                 .into_iter()
@@ -447,6 +454,28 @@ impl PanelData {
             sections.insert(section, open);
         });
         open
+    }
+
+    pub fn apply_layout_preset(&self, preset: LayoutPreset) {
+        let order = self.panels.get_untracked();
+        self.styles.update(|styles| {
+            self.size.update(|size| {
+                preset.apply(&order, styles, size);
+            });
+        });
+    }
+
+    pub fn reset_ui_layout(&self) {
+        let mut new_order = default_panel_order();
+        self.styles.update(|styles| {
+            self.size.update(|size| {
+                reset_ui_layout_state(&mut new_order, styles, size);
+            });
+        });
+        self.panels.set(new_order.clone());
+        if let Some(db) = use_context::<Arc<LapceDb>>() {
+            db.save_panel_orders(new_order);
+        }
     }
 }
 

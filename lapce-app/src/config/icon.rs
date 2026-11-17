@@ -93,6 +93,7 @@ impl LapceIcons {
 
     pub const LAYOUT_PANEL: &'static str = "layout.panel.on";
     pub const LAYOUT_PANEL_OFF: &'static str = "layout.panel.off";
+    pub const LAYOUT: &'static str = "layout";
 
     pub const SEARCH: &'static str = "search.icon";
     pub const SEARCH_CLEAR: &'static str = "search.clear";
@@ -224,6 +225,7 @@ pub enum SemanticIcon {
     NavMcp,
     NavTests,
     NavSettings,
+    NavLayout,
     // file.*
     FileDefault,
     FileDirectoryClosed,
@@ -304,7 +306,8 @@ impl SemanticIcon {
             | Self::NavAgents
             | Self::NavMcp
             | Self::NavTests
-            | Self::NavSettings => IconNamespace::Nav,
+            | Self::NavSettings
+            | Self::NavLayout => IconNamespace::Nav,
             Self::FileDefault
             | Self::FileDirectoryClosed
             | Self::FileDirectoryOpened
@@ -380,6 +383,7 @@ impl SemanticIcon {
             Self::NavMcp => Cow::Borrowed("nav.mcp"),
             Self::NavTests => Cow::Borrowed("nav.tests"),
             Self::NavSettings => Cow::Borrowed("nav.settings"),
+            Self::NavLayout => Cow::Borrowed("nav.layout"),
             Self::FileDefault => Cow::Borrowed("file.default"),
             Self::FileDirectoryClosed => Cow::Borrowed("file.directory.closed"),
             Self::FileDirectoryOpened => Cow::Borrowed("file.directory.opened"),
@@ -455,6 +459,7 @@ impl SemanticIcon {
             Self::NavMcp => "extensions.svg",
             Self::NavTests => "debug-start.svg",
             Self::NavSettings => "settings-gear.svg",
+            Self::NavLayout => "layout.svg",
             Self::FileDefault => "file.svg",
             Self::FileDirectoryClosed => "folder.svg",
             Self::FileDirectoryOpened => "folder-opened.svg",
@@ -612,6 +617,7 @@ mod tests {
         assert_eq!(SemanticIcon::AppLogo.namespace(), IconNamespace::App);
         assert_eq!(SemanticIcon::NavAgents.namespace(), IconNamespace::Nav);
         assert_eq!(SemanticIcon::NavMcp.namespace(), IconNamespace::Nav);
+        assert_eq!(SemanticIcon::NavLayout.namespace(), IconNamespace::Nav);
         assert_eq!(SemanticIcon::FileDefault.namespace(), IconNamespace::File);
         assert_eq!(SemanticIcon::EditorSplitHorizontal.namespace(), IconNamespace::Editor);
         assert_eq!(SemanticIcon::GitBranch.namespace(), IconNamespace::Git);
@@ -627,6 +633,8 @@ mod tests {
         assert_eq!(SemanticIcon::AppLogo.canonical_key(), "app.logo");
         assert_eq!(SemanticIcon::NavAgents.canonical_key(), "nav.agents");
         assert_eq!(SemanticIcon::NavMcp.canonical_key(), "nav.mcp");
+        assert_eq!(SemanticIcon::NavLayout.canonical_key(), "nav.layout");
+        assert_eq!(LapceIcons::LAYOUT, "layout");
         assert_eq!(SemanticIcon::AgentPlanner.canonical_key(), "agent.planner");
         assert_eq!(SemanticIcon::AgentCoder.canonical_key(), "agent.coder");
         assert_eq!(SemanticIcon::StatusSuccess.canonical_key(), "status.success");

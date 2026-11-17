@@ -474,6 +474,10 @@ pub enum LapceWorkbenchCommand {
     #[strum(serialize = "toggle_search_focus")]
     ToggleSearchFocus,
 
+    #[strum(message = "Toggle Agents Focus")]
+    #[strum(serialize = "toggle_antares_agent_focus")]
+    ToggleAntaresAgentFocus,
+
     // Visual toggle commands
     #[strum(serialize = "toggle_terminal_visual")]
     ToggleTerminalVisual,
@@ -495,6 +499,39 @@ pub enum LapceWorkbenchCommand {
 
     #[strum(serialize = "toggle_search_visual")]
     ToggleSearchVisual,
+
+    #[strum(message = "Toggle Agents Panel")]
+    #[strum(serialize = "toggle_antares_agent_visual")]
+    ToggleAntaresAgentVisual,
+
+    // Workbench layout presets & reset per PRODUCT-SPEC §3.2 and §10.2
+    #[strum(message = "Layout: Coding")]
+    #[strum(serialize = "apply_layout_coding")]
+    ApplyLayoutCoding,
+
+    #[strum(message = "Layout: Agentic")]
+    #[strum(serialize = "apply_layout_agentic")]
+    ApplyLayoutAgentic,
+
+    #[strum(message = "Layout: Review")]
+    #[strum(serialize = "apply_layout_review")]
+    ApplyLayoutReview,
+
+    #[strum(message = "Layout: Debug")]
+    #[strum(serialize = "apply_layout_debug")]
+    ApplyLayoutDebug,
+
+    #[strum(message = "Layout: Minimal (Zen Mode)")]
+    #[strum(serialize = "apply_layout_minimal")]
+    ApplyLayoutMinimal,
+
+    #[strum(message = "Layout: Presentation")]
+    #[strum(serialize = "apply_layout_presentation")]
+    ApplyLayoutPresentation,
+
+    #[strum(message = "Developer: Reset UI Layout")]
+    #[strum(serialize = "reset_ui_layout")]
+    ResetUiLayout,
 
     #[strum(serialize = "focus_editor")]
     FocusEditor,

@@ -30,3 +30,13 @@ The Antares IDE integration keeps modifications to upstream Lapce files isolated
 | `lapce-app/src/config/icon.rs` | Add `IconNamespace`, `SemanticIcon`, `IconRegistry` | Unified semantic icon system & SVG sanitizer per ADR-009 | Add enums, registry struct, and unit tests | Applied |
 | `lapce-app/src/config/svg.rs` | Safe fallback to `file.svg` on missing glyphs | Prevent runtime panics if glyph not found in codicons | Add `or_else` fallback to CODICONS_ICONS_DIR | Applied |
 | `lapce-app/src/panel/kind.rs` | Use `LapceIcons::ANTARES_AGENT` for `PanelKind::Antares` | Semantic icon key for Antares Agent panel | Update icon mapping in `PanelKind::svg_name` | Applied |
+| `lapce-app/src/panel/layout_preset.rs` | Layout presets and reset state per PRODUCT-SPEC §3.2 & §10.2 | Coding, Agentic, Review, Debug, Minimal, Presentation presets | Pure layout state functions and unit tests | Applied |
+| `lapce-app/src/panel/data.rs` | Layout presets, reset_ui_layout, and default PanelSize | Workbench layout architecture per ADR-008 and DESIGN-SYSTEM §4 | Add apply_layout_preset and reset_ui_layout | Applied |
+| `lapce-app/src/panel/view.rs` | Min/max resize bounds protecting editor 45% width | Enforce Design System layout rules during drag-resize | Clamp left/right sidebars to max 45% width | Applied |
+| `lapce-app/src/title.rs` | Command Center search bar & titlebar layout controls | Global command center and sidebar/panel toggles per PRODUCT-SPEC §3.2 | Add layout toggle icons and preset menu | Applied |
+| `lapce-app/src/command.rs` | Add layout preset commands and agent panel toggles | Command palette and keybinding support for workbench layouts | Add ApplyLayout* and ToggleAntaresAgent* variants | Applied |
+| `lapce-app/src/window_tab.rs` | Wire layout preset commands to PanelData | Execute layout transitions and focus shifts | Add command match arms in run_workbench_command | Applied |
+| `defaults/keymaps-common.toml` | Keybindings for sidebar, panel, and agent toggles | Keyboard-first workbench navigation (Ctrl+B, Ctrl+J, Ctrl+Alt+A) | Add keymap entries | Applied |
+| `defaults/keymaps-macos.toml` | macOS keybindings for sidebar, panel, and agent toggles | Keyboard-first workbench navigation (meta+b, meta+j, meta+alt+a) | Add macOS keymap entries | Applied |
+| `defaults/icon-theme.toml` | Add layout icon mapping | Icon mapping for layout presets button | Add layout = "layout.svg" | Applied |
+| `lapce-app/src/config/icon.rs` | Add `LapceIcons::LAYOUT` and `SemanticIcon::NavLayout` | Unified semantic icon mapping for workbench layout controls | Add constant and enum variant | Applied |

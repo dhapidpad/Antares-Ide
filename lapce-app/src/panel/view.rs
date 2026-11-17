@@ -290,14 +290,20 @@ pub fn panel_container_view(
                                     + pointer_event.pos.x
                                     - drag_start_point.x;
                                 let current_panel_size = panel_size.get_untracked();
-                                let new_size = new_size
-                                    .max(150.0)
-                                    .min(available_size.width - 150.0 - 150.0);
+                                let min_sidebar = 200.0;
+                                let max_sidebar = (available_size.width * 0.45)
+                                    .min(520.0)
+                                    .max(min_sidebar);
+                                let new_size =
+                                    new_size.max(min_sidebar).min(max_sidebar);
                                 if new_size != current_panel_size.left {
                                     panel_size.update(|size| {
                                         size.left = new_size;
                                         size.right = size.right.min(
-                                            available_size.width - new_size - 150.0,
+                                            (available_size.width
+                                                - new_size
+                                                - 150.0)
+                                                .max(min_sidebar),
                                         )
                                     })
                                 }
@@ -315,7 +321,7 @@ pub fn panel_container_view(
                                 }
 
                                 let new_size = new_size
-                                    .max(100.0)
+                                    .max(140.0)
                                     .min(available_size.height - 100.0);
                                 let current_size =
                                     panel_size.with_untracked(|s| s.bottom);
@@ -329,14 +335,20 @@ pub fn panel_container_view(
                                 let new_size = current_size.width
                                     - (pointer_event.pos.x - drag_start_point.x);
                                 let current_panel_size = panel_size.get_untracked();
-                                let new_size = new_size
-                                    .max(150.0)
-                                    .min(available_size.width - 150.0 - 150.0);
+                                let min_sidebar = 200.0;
+                                let max_sidebar = (available_size.width * 0.45)
+                                    .min(560.0)
+                                    .max(min_sidebar);
+                                let new_size =
+                                    new_size.max(min_sidebar).min(max_sidebar);
                                 if new_size != current_panel_size.right {
                                     panel_size.update(|size| {
                                         size.right = new_size;
                                         size.left = size.left.min(
-                                            available_size.width - new_size - 150.0,
+                                            (available_size.width
+                                                - new_size
+                                                - 150.0)
+                                                .max(min_sidebar),
                                         )
                                     })
                                 }

@@ -39,6 +39,28 @@ command = "zoom_in"
 key = "meta+-"
 command = "zoom_out"
 
+# --------------------------------- Workbench Panels & Layout ------------------------
+
+[[keymaps]]
+key = "meta+b"
+command = "toggle_panel_left_visual"
+
+[[keymaps]]
+key = "meta+j"
+command = "toggle_panel_bottom_visual"
+
+[[keymaps]]
+key = "meta+alt+b"
+command = "toggle_panel_right_visual"
+
+[[keymaps]]
+key = "meta+alt+a"
+command = "toggle_antares_agent_visual"
+
+[[keymaps]]
+key = "meta+shift+a"
+command = "toggle_antares_agent_focus"
+
 [[keymaps]]
 key = "meta+enter"
 command = "source_control_commit"

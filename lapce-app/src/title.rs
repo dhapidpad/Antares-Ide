@@ -20,6 +20,7 @@ use crate::{
     config::{LapceConfig, color::LapceColor, icon::LapceIcons},
     listener::Listener,
     main_split::MainSplitData,
+    panel::position::PanelContainerPosition,
     update::ReleaseInfo,
     window_tab::WindowTabData,
     workspace::LapceWorkspace,
@@ -242,12 +243,13 @@ fn middle(
                 ),
                 label(move || {
                     if let Some(s) = local_workspace.display() {
-                        s
+                        format!("{s} — Search files & commands (Ctrl+P)")
                     } else {
-                        "Open Folder".to_string()
+                        "Antares IDE — Open Folder or Command Palette (Ctrl+P)"
+                            .to_string()
                     }
                 })
-                .style(|s| s.padding_left(10).padding_right(5).selectable(false)),
+                .style(|s| s.padding_left(10).padding_right(6).selectable(false)),
                 open_folder(),
             ))
             .style(|s| s.align_items(Some(AlignItems::Center))),
@@ -264,8 +266,8 @@ fn middle(
             let config = config.get();
             s.flex_basis(0)
                 .flex_grow(10.0f32)
-                .min_width(200.0)
-                .max_width(500.0)
+                .min_width(260.0)
+                .max_width(560.0)
                 .height(26.0)
                 .justify_content(Some(JustifyContent::Center))
                 .align_items(Some(AlignItems::Center))
@@ -273,6 +275,13 @@ fn middle(
                 .border_color(config.color(LapceColor::LAPCE_BORDER))
                 .border_radius(6.0)
                 .background(config.color(LapceColor::EDITOR_BACKGROUND))
+                .cursor(CursorStyle::Pointer)
+                .hover(|s| {
+                    s.border_color(config.color(LapceColor::EDITOR_CARET))
+                        .background(
+                            config.color(LapceColor::PANEL_HOVERED_BACKGROUND),
+                        )
+                })
         }),
         stack((
             clickable_icon(
@@ -305,6 +314,7 @@ fn middle(
 }
 
 fn right(
+    window_tab_data: Rc<WindowTabData>,
     window_command: Listener<WindowCommand>,
     workbench_command: Listener<LapceWorkbenchCommand>,
     latest_release: ReadSignal<Arc<Option<ReleaseInfo>>>,
@@ -328,9 +338,116 @@ fn right(
 
     let has_update = move || latest_version.with(|v| v.is_some());
 
+    let panel = window_tab_data.panel.clone();
+    let left_shown = {
+        let panel = panel.clone();
+        move || panel.is_container_shown(&PanelContainerPosition::Left, true)
+    };
+    let bottom_shown = {
+        let panel = panel.clone();
+        move || panel.is_container_shown(&PanelContainerPosition::Bottom, true)
+    };
+    let right_shown = {
+        let panel = panel.clone();
+        move || panel.is_container_shown(&PanelContainerPosition::Right, true)
+    };
+
+    let toggle_left_icon = clickable_icon(
+        move || {
+            if left_shown() {
+                LapceIcons::SIDEBAR_LEFT
+            } else {
+                LapceIcons::SIDEBAR_LEFT_OFF
+            }
+        },
+        move || {
+            workbench_command.send(LapceWorkbenchCommand::TogglePanelLeftVisual);
+        },
+        || false,
+        || false,
+        || "Toggle Primary Side Bar (Ctrl+B)",
+        config,
+    )
+    .style(|s| s.margin_right(4.0));
+
+    let toggle_bottom_icon = clickable_icon(
+        move || {
+            if bottom_shown() {
+                LapceIcons::LAYOUT_PANEL
+            } else {
+                LapceIcons::LAYOUT_PANEL_OFF
+            }
+        },
+        move || {
+            workbench_command.send(LapceWorkbenchCommand::TogglePanelBottomVisual);
+        },
+        || false,
+        || false,
+        || "Toggle Bottom Panel (Ctrl+J)",
+        config,
+    )
+    .style(|s| s.margin_right(4.0));
+
+    let toggle_right_icon = clickable_icon(
+        move || {
+            if right_shown() {
+                LapceIcons::SIDEBAR_RIGHT
+            } else {
+                LapceIcons::SIDEBAR_RIGHT_OFF
+            }
+        },
+        move || {
+            workbench_command.send(LapceWorkbenchCommand::TogglePanelRightVisual);
+        },
+        || false,
+        || false,
+        || "Toggle Secondary Side Bar (Ctrl+Alt+B)",
+        config,
+    )
+    .style(|s| s.margin_right(4.0));
+
+    let layout_presets_button = not_clickable_icon(
+        || LapceIcons::LAYOUT,
+        || false,
+        || false,
+        || "Customize Layout / Presets",
+        config,
+    )
+    .popout_menu(move || {
+        Menu::new("")
+            .entry(MenuItem::new("Layout: Coding").action(move || {
+                workbench_command.send(LapceWorkbenchCommand::ApplyLayoutCoding);
+            }))
+            .entry(MenuItem::new("Layout: Agentic").action(move || {
+                workbench_command.send(LapceWorkbenchCommand::ApplyLayoutAgentic);
+            }))
+            .entry(MenuItem::new("Layout: Review").action(move || {
+                workbench_command.send(LapceWorkbenchCommand::ApplyLayoutReview);
+            }))
+            .entry(MenuItem::new("Layout: Debug").action(move || {
+                workbench_command.send(LapceWorkbenchCommand::ApplyLayoutDebug);
+            }))
+            .entry(MenuItem::new("Layout: Minimal (Zen Mode)").action(move || {
+                workbench_command.send(LapceWorkbenchCommand::ApplyLayoutMinimal);
+            }))
+            .entry(MenuItem::new("Layout: Presentation").action(move || {
+                workbench_command
+                    .send(LapceWorkbenchCommand::ApplyLayoutPresentation);
+            }))
+            .separator()
+            .entry(MenuItem::new("Reset UI Layout").action(move || {
+                workbench_command.send(LapceWorkbenchCommand::ResetUiLayout);
+            }))
+    })
+    .style(|s| s.margin_right(8.0));
+
     stack((
         drag_window_area(empty())
             .style(|s| s.height_pct(100.0).flex_basis(0.0).flex_grow(1.0f32)),
+        toggle_left_icon,
+        toggle_bottom_icon,
+        toggle_right_icon,
+        layout_presets_button,
         stack((
             not_clickable_icon(
                 || LapceIcons::SETTINGS,
@@ -445,6 +562,7 @@ pub fn title(window_tab_data: Rc<WindowTabData>) -> impl View {
             config,
         ),
         right(
+            window_tab_data.clone(),
             window_command,
             workbench_command,
             latest_release,
